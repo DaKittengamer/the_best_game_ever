@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=320, initial-scale=1">
+    <meta charset="utf-8">
+    <style>
+      body, html {
+        /*Look! I really do use CSS to make this game!*/
+        min-width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+        font: Arial 14px;
+        background-color: black;
+        color: white;
+      }
+    </style>
+    
+    <button onclick="saveButtonClicked()">Save game</button>
+    <button onclick="loadButtonClicked()">Load game</button>
+    
+    <p><span id="save"></span></p>
+    
+    <p><span id="clickAmount">0</span></p>
+
+    <button onclick="increaseClicks()">It's a button!</button>
+    <button id="upgradeCPC" onclick="upgradeClicksPerClick()">Upgrade CPC - 32c</button>
+    <button onclick="purchaseBagel()">Buy a bagel - 19c</button>
+    <button id="unlockEBay" onclick="unlockEBay()">Unlock eBay - 92c</button>
+    
+    <p><span id="bagelBar"></span></p>
+    
+    <br><br><br><br><br>
+    
+    <p><span id="eBaySectionHeader"></span></p>
+    
+    <br><br>
+    
+    <button id="childSizedCage" hidden onclick="childSizedCageEbay()">Child sized cage - 15c</button>
+    <button id="kidnap" hidden onclick="trapChild()">Trap Child - 1b + cage</button>
+    <p><span id="childSizedCageAmount" hidden></span></p>
+    <p><span id="childrenAmount" hidden></span></p>
+    
+    <br><br><br><br><br>
+    
+    <button id="prestigeButton" onclick="prestigeButton()">Prestige - 1000c</button>
+    <p><span id="prestigeDisplay" hidden></span></p>
+    <button id="currencyKeyButton" hidden onclick="currencyKeyUnlock()">Unlock currency symbol index - 2p</button>
+    <!-- for pet update
+    <button id="petUnlockButton" hidden onclick="petUnlock();">Unlock Pet - 3p</button>
+    <p><span id="timesPettedDisplay" hidden></span></p>
+    <canvas id="petCanvas" width="250" height="250" style="border:1px solid #FFFFFF;></canvas>
+    -->
+    <!-- for autoclicker update
+    <button id="autoClickerMiniGameUnlockButton" hidden onclick="autoClickerMiniGameUnlockButtonClicked()">Unlock autoclicker - 5p</button>
+    <br>
+    <button id="autoButton" hidden onclick="clickAutoButton()">Auto</button>
+    <p><span id="autoDisplay" hidden></span>
+    -->
+    <br>
+    <button id="rebirthButton" hidden onclick="rebirthButton()">Rebirth - 1000000p</button>
+    <p><span id="rebirthDisplay" hidden></span></p>
+    <br>
+    <button id="ascendButton" hidden onclick="ascendButton()">Ascend - 57r</button>
+    <p><span id="ascendDisplay" hidden></span></p>
+    <br>
+    <button id="reincarnateButton" hidden onclick="reincarnateButton()">Reincarnate - 2087a</button>
+    <p><span id="reincarnateDisplay"></span></p>
+    <br>
+    <button id="evolveButton" hidden onclick="evolveButton()">Evolve - 2081968rc</button>
+    <p><span id="evolveDisplay" hidden></span></p>
+    <br>
+    
+    <br><br><br><br><br>
+    
+    <h2>Changelog</h2>
+    <p>10/30/2026 - v1.0.3</p>
+    <p>  - Bagel and click displays now more self evident</p>
+    <p>10/29/2026 - v1.0.2</p>
+    <p>  - Barebones of all types of prestige systems should be finished now</p>
+    <p>  - Fixed currency key button not showing up</p>
+    <p>10/28/2026 - v1.0.1</p>
+    <p>  - Added changelog</p>
+    <p>  - Added transcension system</p>
+
+    <script>
+        let clicks = 0;
+      	let multiplier = 1;
+      	let cPCBought = false;
+      	let bagelAmount = 0;
+      	let eBayBought = false;
+      	let childSizedCageAmount = 0;
+      	let children = 0;
+      	const tickRate = 50;
+      	let tick = 0;
+      	let prestigePoints = 0;
+      	let rebirthPoints = 0;
+      	let ascensionPoints = 0;
+      	let reincarnationPoints = 0;
+      	let evolutionPoints = 0;
+        let transcentionPoints = 0;
+      	let prestiges = 0;
+      	let rebirths = 0;
+      	let ascensions = 0;
+      	let reincarnations = 0;
+      	let evolutions = 0;
+      	let transcentions = 0;
+      	let currencyKeyBought = false;
+      	//let autoClickerMiniGameUnlocked = false; - for autoclicker update
+      	/* - for pet update
+      	let petUnlocked = false;
+      	var petIcon;
+      	let javascriptPetCanvas = document.getElementById("petCanvas");
+      	let petCanvasContext = javascripPetCanvas.getContext("2d");
+      	var random;
+      	let destinationY = 0;
+      	let destinationX = 0;
+      	let movesLeft = 0;
+        let timesPetted = 0;
+      	*/
+      
+        function increaseClicks() {
+            clicks += (1 * multiplier);
+            document.getElementById("clickAmount").textContent = Math.floor(clicks);
+        }
+      	function upgradeClicksPerClick() {
+        	if (clicks >= 32 && cPCBought === false) {
+            	clicks -= 32;
+            	multiplier = 2;
+            	cPCBought = true;
+            	document.getElementById("clickAmount").textContent = Math.floor(clicks);
+              	document.getElementById("upgradeCPC").hidden = true;
+        	}
+        }
+      	function purchaseBagel() {
+          	if (clicks >= 19) {
+            	clicks -= 19;
+            	bagelAmount += 1;
+            	document.getElementById("bagelBar").textContent = bagelAmount;
+            	document.getElementById("clickAmount").textContent = Math.floor(clicks);
+          	}
+        }
+      	function unlockEBay() {
+          	if (clicks >= 92 && eBayBought === false) {
+            	clicks -= 92;
+            	eBayBought = true;
+            	document.getElementById("eBaySectionHeader").textContent = "ebay";
+            	document.getElementById("childSizedCage").removeAttribute("hidden");
+            	document.getElementById("childSizedCageAmount").removeAttribute("hidden");
+            	document.getElementById("childrenAmount").removeAttribute("hidden");
+              document.getElementById("clickAmount").textContent = Math.floor(clicks);
+            	document.getElementById("kidnap").removeAttribute("hidden");
+              	document.getElementById("unlockEBay").hidden = true;
+          	}
+        }
+      	function saveButtonClicked() {
+          clicks = clicks.toPrecision(1);
+          	let saveCode = (clicks.toString()).concat("|",multiplier.toString(),"|",cPCBought,"|",bagelAmount,"|",eBayBought,"|",childSizedCageAmount.toString(),"|",children.toString(),"|",prestigePoints.toString(),"|",rebirthPoints.toString(),"|",ascensionPoints.toString(),"|",reincarnationPoints.toString(),"|",evolutionPoints.toString(),"|",transcentionPoints.toString(),"|",prestiges.toString(),"|",rebirths.toString(),"|",ascensions.toString(),"|",reincarnations.toString(),"|",evolutions.toString(),"|",transcentions.toString(),"|",currencyKeyBought);
+          	document.getElementById("save").textContent = saveCode;
+        }
+      	function loadButtonClicked() {
+        	let savecode = window.prompt("\Input save code here:");
+          	let saveArray = savecode.split("|");
+          	clicks = Number(saveArray[0]);
+          	multiplier = Number(saveArray[1]);
+          	cPCBought = saveArray[2];
+          	bagelAmount = Number(saveArray[3]);
+          	eBayBought = saveArray[4];
+          	childSizedCageAmount = Number(saveArray[5]);
+          	children = Number(saveArray[6]);
+          	prestigePoints = Number(saveArray[7]);
+          	rebirthPoints = Number(saveArray[8]);
+          	ascensionPoints = Number(saveArray[9]);
+          	reincarnationPoints = Number(saveArray[10]);
+          	evolutionPoints = Number(saveArray[11]);
+          	transcentionPoints = Number(saveArray[12]);
+          	prestiges = Number(saveArray[13]);
+          	rebirths = Number(saveArray[14]);
+          	ascensions = Number(saveArray[15]);
+          	reincarnations = Number(saveArray[16]);
+          	evolutions = Number(saveArray[17]);
+          	transcentions = Number(saveArray[18]);
+          	currencyKeyBought = saveArray[19];
+          	if (eBayBought === true) {
+            	document.getElementById("eBaySectionHeader").textContent = "ebay";
+            	document.getElementById("childSizedCage").removeAttribute("hidden");
+            	document.getElementById("childSizedCageAmount").removeAttribute("hidden");
+            	document.getElementById("childrenAmount").removeAttribute("hidden");
+            	document.getElementById("kidnap").removeAttribute("hidden");
+              	document.getElementById("unlockEBay").hidden = true;
+          	}
+          	if (cPCBought === true) {
+              	document.getElementById("upgradeCPC").hidden = true;
+            }
+          	if (prestiges >= 1) {
+            	document.getElementById("prestigeDisplay").removeAttribute = ("hidden");
+              	document.getElementById("prestigeDisplay").textContent = prestigePoints;
