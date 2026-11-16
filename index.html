@@ -389,6 +389,121 @@
         function petColorSetTan() {
           petColor = "tan";
         };
+        function petColorSetCyan() {
+          petColor = "cyan";
+        };
+        function petColorSetLimeGreen() {
+          petColor = "limegreen";
+        };
+        function petColorSetLime() {
+          petColor = "lime";
+        };
+        function petColorSetMagenta() {
+          petColor = "magenta";
+        };
+        function petColorSetTeal() {
+          petColor = "teal";
+        };
+        function petIconCreate() {
+          petIcon = newPetIconRender(20, 20, 125, 125);
+        };
+        function petIconRender(width, height, x, y) {
+          this.width = width;
+          this.height = height;
+          this.x = x;
+          this.y = y;
+          if (timesPetted >= 10) {
+            this.color = petColor;
+          } else {
+            this.color = "blue";
+          };
+          this.update = function() {
+            petCanvasContext.fillStyle = this.color;
+            petCanvasContext.fillRect(this.x, this.y, this.width, this.height);
+          };
+          this.newPosition = function() {
+            if (this.x > 250) {
+              thix.x = 250;
+            };
+            if (this.y > 250) {
+              this.y = 250;
+            };
+            if (this.x < 0) {
+              this.x = 0;
+            };
+            if (this.y < 0) {
+              this.y = 0
+            };
+            window.addEventListener("pointerdown", function() {
+              timesPetted += 1;
+            });
+          };
+          clear : function() {
+            this.petCanvasContext.clearRect(0, 0, 250, 250);
+          };
+          function move() {
+            if (movesLeft === 0) {
+              movesLeft = 5;
+              random = Math.random();
+              if (random < 0.50) {
+                destinationX = 0;
+              } else {
+                random = Math.random();
+                if (random <= 0.09) {
+                  destinationX = -5;
+                } elif (random <= 0.19) {
+                  destinationX = -4;
+                } elif (random <= 0.29) {
+                  destinationX = -3;
+                } elif (random <= 0.39) {
+                  destinationX = -2;
+                } elif (random <= 0.49) {
+                  destinationX = -1;
+                } elif (random <= 0.59) {
+                  destinationX = 1;
+                } elif (random <= 0.69) {
+                  destinationX = 2;
+                } elif (random <= 0.79) {
+                  destinationX = 3;
+                } elif (random <= 0.89) {
+                  destinationX = 4;
+                } else {
+                  destinationX = 5;
+                };
+              random = Math.random();
+              if (random < 0.50) {
+                destinationY = 0;
+              } else {
+                random = Math.random();
+                if (random <= 0.09) {
+                  destinationY = -5;
+                } elif (random <= 0.19) {
+                  destinationY = -4;
+                } elif (random <= 0.29) {
+                  destinationY = -3;
+                } elif (random <= 0.39) {
+                  destinationY = -2;
+                } elif (random <= 0.49) {
+                  destinationY = -1;
+                } elif (random <= 0.59) {
+                  destinationY = 1;
+                } elif (random <= 0.69) {
+                  destinationY = 2;
+                } elif (random <= 0.79) {
+                  destinationY = 3;
+                } elif (random <= 0.89) {
+                  destinationY = 4;
+                } else {
+                  destinationY = 5;
+                };
+              if (movesLeft > 0) {
+                petIcon.newPosition();
+                movesLeft -= 1;
+              };
+              };
+            };
+          };
+        };
         const timekeeper = setInterval(() => {
           tick++;
           clicks += (children/20);
