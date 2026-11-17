@@ -82,6 +82,9 @@
       <br><br><br><br><br>
     
       <h2>Changelog</h2>
+      <p>11/17/2026 - v1.1</p>
+      <p>  - Finally uploaded pet update!</p>
+      <p>  - Yay!</p>
       <p>11/9/2026 - v1.0.4</p>
       <p>  - Finally got around to porting this to github so its actually published</p>
       <p>10/30/2026 - v1.0.3</p>
@@ -389,6 +392,121 @@
         function petColorSetTan() {
           petColor = "tan";
         };
+        function petColorSetCyan() {
+          petColor = "cyan";
+        };
+        function petColorSetLimeGreen() {
+          petColor = "limegreen";
+        };
+        function petColorSetLime() {
+          petColor = "lime";
+        };
+        function petColorSetMagenta() {
+          petColor = "magenta";
+        };
+        function petColorSetTeal() {
+          petColor = "teal";
+        };
+        function petIconCreate() {
+          petIcon = newPetIconRender(20, 20, 125, 125);
+        };
+        function petIconRender(width, height, x, y) {
+          this.width = width;
+          this.height = height;
+          this.x = x;
+          this.y = y;
+          if (timesPetted >= 10) {
+            this.color = petColor;
+          } else {
+            this.color = "blue";
+          };
+          this.update = function() {
+            petCanvasContext.fillStyle = this.color;
+            petCanvasContext.fillRect(this.x, this.y, this.width, this.height);
+          };
+          this.newPosition = function() {
+            if (this.x > 250) {
+              thix.x = 250;
+            };
+            if (this.y > 250) {
+              this.y = 250;
+            };
+            if (this.x < 0) {
+              this.x = 0;
+            };
+            if (this.y < 0) {
+              this.y = 0
+            };
+            window.addEventListener("pointerdown", function() {
+              timesPetted += 1;
+            });
+          };
+          clear : function() {
+            this.petCanvasContext.clearRect(0, 0, 250, 250);
+          };
+          function move() {
+            if (movesLeft === 0) {
+              movesLeft = 5;
+              random = Math.random();
+              if (random < 0.50) {
+                destinationX = 0;
+              } else {
+                random = Math.random();
+                if (random <= 0.09) {
+                  destinationX = -5;
+                } elif (random <= 0.19) {
+                  destinationX = -4;
+                } elif (random <= 0.29) {
+                  destinationX = -3;
+                } elif (random <= 0.39) {
+                  destinationX = -2;
+                } elif (random <= 0.49) {
+                  destinationX = -1;
+                } elif (random <= 0.59) {
+                  destinationX = 1;
+                } elif (random <= 0.69) {
+                  destinationX = 2;
+                } elif (random <= 0.79) {
+                  destinationX = 3;
+                } elif (random <= 0.89) {
+                  destinationX = 4;
+                } else {
+                  destinationX = 5;
+                };
+              random = Math.random();
+              if (random < 0.50) {
+                destinationY = 0;
+              } else {
+                random = Math.random();
+                if (random <= 0.09) {
+                  destinationY = -5;
+                } elif (random <= 0.19) {
+                  destinationY = -4;
+                } elif (random <= 0.29) {
+                  destinationY = -3;
+                } elif (random <= 0.39) {
+                  destinationY = -2;
+                } elif (random <= 0.49) {
+                  destinationY = -1;
+                } elif (random <= 0.59) {
+                  destinationY = 1;
+                } elif (random <= 0.69) {
+                  destinationY = 2;
+                } elif (random <= 0.79) {
+                  destinationY = 3;
+                } elif (random <= 0.89) {
+                  destinationY = 4;
+                } else {
+                  destinationY = 5;
+                };
+                if (movesLeft > 0) {
+                  petIcon.newPosition();
+                  movesLeft -= 1;
+                };
+              };
+            };
+          };
+        };
         const timekeeper = setInterval(() => {
           tick++;
           clicks += (children/20);
@@ -397,6 +515,79 @@
           document.getElementById("clickAmount").textContent = `Clicks: ${Math.floor(clicks)}`;
           if (bagelAmount >= 1) {
           	document.getElementById("bagelBar").textContent = `Bagels: ${bagelAmount}`;
+          };
+          if (timesPetted >= 10) {
+            document.getElementById("petColorChangeIndicator").removeAttribute = ("hidden");
+            document.getElementById("petColorBlue").removeAttribute = ("hidden");
+            document.getElementById("petColorRed").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 13;
+          };
+          if (timesPetted >= 13) {
+            document.getElementById("petColorGreen").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 14;
+          };
+          if (timesPetted >= 14) {
+            document.getElementById("petColorYellow").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 16;
+          };
+          if (timesPetted >= 16) {
+            document.getElementById("petColorTeal").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 20;
+          };
+          if (timesPetted >= 20) {
+            document.getElementById("petColorOrange").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 30;
+          };
+          if (timesPetted >= 30) {
+            document.getElementById("petColorPurple").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 40;
+          };
+          if (timesPetted >= 40) {
+            document.getElementById("petColorBrown").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 44;
+          };
+          if (timesPetted >= 44) {
+            document.getElementById("petColorIndigo").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 50;
+          };
+          if (timesPetted >= 50) {
+            document.getElementById("petColorLightBlue").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 60;
+          };
+          if (timesPetted >= 60) {
+            document.getElementById("petColorSkyBlue").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 90;
+          };
+          if (timesPetted >= 90) {
+            document.getElementById("petColorPink").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 250;
+          };
+          if (timesPetted >= 250) {
+            document.getElementbyId("petColorTan").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 300;
+          };
+          if (timesPetted >= 300) {
+            document.getElementById("petColorCyan").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 1300;
+          };
+          if (timesPetted >= 1300) {
+            document.getElementById("petColorLimeGreen").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 1962;
+          };
+          if (timesPetted >= 1962) {
+            document.getElementById("petColorLime").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 13000;
+          };
+          if (timesPetted >= 13000) {
+            document.getElementById("petColorMagenta").removeAttribute = ("hidden");
+          };
+          javascriptPetCanvas.clear();
+          petIcon.update();
+          petIcon.move();
+          petCanvasContext.clearRect(0, 0, 250, 250);
+          document.getElementById("timesPettedDisplay").textContent = `Times pettable pet petted by petting pettable pet: ${timesPetted}`;
+          if (nextPetColorUnlockAtDisplayVisible === true) {
+            document.getElementById("nextPetColorUnlockAtDisplay).textContent = `The next pet color unlocks at ${nextPetColorUnlockAt} pets`;
           };
         }, tickRate);
       </script>
