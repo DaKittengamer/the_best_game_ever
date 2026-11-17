@@ -496,10 +496,10 @@
                 } else {
                   destinationY = 5;
                 };
-              if (movesLeft > 0) {
-                petIcon.newPosition();
-                movesLeft -= 1;
-              };
+                if (movesLeft > 0) {
+                  petIcon.newPosition();
+                  movesLeft -= 1;
+                };
               };
             };
           };
@@ -512,6 +512,23 @@
           document.getElementById("clickAmount").textContent = `Clicks: ${Math.floor(clicks)}`;
           if (bagelAmount >= 1) {
           	document.getElementById("bagelBar").textContent = `Bagels: ${bagelAmount}`;
+          };
+          if (timesPetted >= 10) {
+            document.getElementById("petColorChangeIndicator").removeAttribute = ("hidden");
+            document.getElementById("petColorBlue").removeAttribute = ("hidden");
+            document.getElementById("petColorRed").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 13;
+          };
+          if (timesPetted >= 13) {
+            document.getElementById("petColorGreen").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 14;
+          };
+          if (timesPetted >= 14) {
+            document.getElementById("petColorYellow").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 16;
+          };
+          if (timesPetted >= 16) {
+            document.getElementById("petColorTeal").removeAttribute = ("hidden");
           };
         }, tickRate);
       </script>
