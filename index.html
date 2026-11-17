@@ -82,6 +82,9 @@
       <br><br><br><br><br>
     
       <h2>Changelog</h2>
+      <p>11/17/2026 - v1.1</p>
+      <p>  - Finally uploaded pet update!</p>
+      <p>  - Yay!</p>
       <p>11/9/2026 - v1.0.4</p>
       <p>  - Finally got around to porting this to github so its actually published</p>
       <p>10/30/2026 - v1.0.3</p>
@@ -581,6 +584,7 @@
           javascriptPetCanvas.clear();
           petIcon.update();
           petIcon.move();
+          petCanvasContext.clearRect(0, 0, 250, 250);
           document.getElementById("timesPettedDisplay").textContent = `Times pettable pet petted by petting pettable pet: ${timesPetted}`;
           if (nextPetColorUnlockAtDisplayVisible === true) {
             document.getElementById("nextPetColorUnlockAtDisplay).textContent = `The next pet color unlocks at ${nextPetColorUnlockAt} pets`;
