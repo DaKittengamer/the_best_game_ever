@@ -529,6 +529,61 @@
           };
           if (timesPetted >= 16) {
             document.getElementById("petColorTeal").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 20;
+          };
+          if (timesPetted >= 20) {
+            document.getElementById("petColorOrange").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 30;
+          };
+          if (timesPetted >= 30) {
+            document.getElementById("petColorPurple").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 40;
+          };
+          if (timesPetted >= 40) {
+            document.getElementById("petColorBrown").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 44;
+          };
+          if (timesPetted >= 44) {
+            document.getElementById("petColorIndigo").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 50;
+          };
+          if (timesPetted >= 50) {
+            document.getElementById("petColorLightBlue").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 60;
+          };
+          if (timesPetted >= 60) {
+            document.getElementById("petColorSkyBlue").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 90;
+          };
+          if (timesPetted >= 90) {
+            document.getElementById("petColorPink").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 250;
+          };
+          if (timesPetted >= 250) {
+            document.getElementbyId("petColorTan").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 300;
+          };
+          if (timesPetted >= 300) {
+            document.getElementById("petColorCyan").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 1300;
+          };
+          if (timesPetted >= 1300) {
+            document.getElementById("petColorLimeGreen").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 1962;
+          };
+          if (timesPetted >= 1962) {
+            document.getElementById("petColorLime").removeAttribute = ("hidden");
+            nextPetColorUnlockAt = 13000;
+          };
+          if (timesPetted >= 13000) {
+            document.getElementById("petColorMagenta").removeAttribute = ("hidden");
+          };
+          javascriptPetCanvas.clear();
+          petIcon.update();
+          petIcon.move();
+          document.getElementById("timesPettedDisplay").textContent = `Times pettable pet petted by petting pettable pet: ${timesPetted}`;
+          if (nextPetColorUnlockAtDisplayVisible === true) {
+            document.getElementById("nextPetColorUnlockAtDisplay).textContent = `The next pet color unlocks at ${nextPetColorUnlockAt} pets`;
           };
         }, tickRate);
       </script>
