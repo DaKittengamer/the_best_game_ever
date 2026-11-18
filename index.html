@@ -63,6 +63,7 @@
       <button id="petColorLime" hidden onclick="petColorSetLime()">Lime</button>
       <button id="petColorMagenta" hidden onclick="petColorSetMagenta()">Magenta</button>
       <button id="petColorTeal" hidden onclick="petColorSetTeal()">Teal</button>
+      <button id="petColorNavy" hidden onclick="petColorSetNavy()">Navy</button>
       <br>
       <canvas id="petCanvas" width="250" height="250" style="border:1px solid #FFFFFF;></canvas>
       <br>
@@ -81,19 +82,22 @@
       <br><br><br><br><br>
     
       <h2>Changelog</h2>
+      <p>11/18/2026 - v1.1.1.0</p>
+      <p>  - Changed changelog formatting</p>
+      <p>  - Added Navy as pet color</p>
       <p>11/17/2026 - v1.1.0.1</p>
       <p>  - Fixed changelog not appearing</p>
-      <p>11/17/2026 - v1.1.0</p>
+      <p>11/17/2026 - v1.1.0.0</p>
       <p>  - Finally uploaded pet update!</p>
       <p>  - Yay!</p>
-      <p>11/9/2026 - v1.0.4</p>
+      <p>11/9/2026 - v1.0.4.0</p>
       <p>  - Finally got around to porting this to github so its actually published</p>
-      <p>10/30/2026 - v1.0.3</p>
+      <p>10/30/2026 - v1.0.3.0</p>
       <p>  - Bagel and click displays now more self evident</p>
-      <p>10/29/2026 - v1.0.2</p>
+      <p>10/29/2026 - v1.0.2.0</p>
       <p>  - Barebones of all types of prestige systems should be finished now</p>
       <p>  - Fixed currency key button not showing up</p>
-      <p>10/28/2026 - v1.0.1</p>
+      <p>10/28/2026 - v1.0.1.0</p>
       <p>  - Added changelog</p>
       <p>  - Added transcension system</p>
 
@@ -408,6 +412,9 @@
         function petColorSetTeal() {
           petColor = "teal";
         };
+        function petColorSetNavy() {
+          petColor = "navy";
+        };
         function petIconCreate() {
           petIcon = newPetIconRender(20, 20, 125, 125);
         };
@@ -553,7 +560,10 @@
           };
           if (timesPetted >= 50) {
             document.getElementById("petColorLightBlue").removeAttribute = ("hidden");
-            nextPetColorUnlockAt = 60;
+            nextPetColorUnlockAt = 52;
+          };
+          if (timesPetted >= 52) {
+            document.getElementById("petColorNavy").removeAttribute = ("hidden");
           };
           if (timesPetted >= 60) {
             document.getElementById("petColorSkyBlue").removeAttribute = ("hidden");
