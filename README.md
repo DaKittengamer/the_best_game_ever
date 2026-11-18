@@ -5,6 +5,9 @@ the changelog is broken so here:
 
 Changelog:
 
+11/18/2026 - v1.1.2.0
+  - Added single semi-colon (plus this changelog entry)
+
 11/18/2026 - v1.1.1.0
   - Changed changelog formatting
   - Added Navy as pet color
