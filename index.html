@@ -602,9 +602,49 @@
           if (nextPetColorUnlockAtDisplayVisible === true) {
             document.getElementById("nextPetColorUnlockAtDisplay).textContent = `The next pet color unlocks at ${nextPetColorUnlockAt} pets`;
           };
+          localStorage.setItem("clicksLocal", clicks.toString());
+          localStorage.setItem("multiplierLocal", multiplier.toString());
+          localStorage.setItem("cPCBoughtLocal", cPCBought);
+          localStorage.setItem("bagelAmountLocal", bagelAmount.toString());
+          localStorage.setItem("eBayBoughtLocal", eBayBought);
+          localStorage.setItem("childSizedCageAmountLocal", childSizedCageAmount);
+          localStorage.setItem("childrenLocal", children);
+          localStorage.setItem("prestigesPointsLocal", prestigePoints);
+          localStorage.setItem("rebirthPointsLocal", rebirthPoints);
+          localStorage.setItem("ascensionPointsLocal", ascensionPoints);
+          localStorage.setItem("reincarnationPointsLocal", reincarnationPoints);
+          localStorage.setItem("evolutionPointsLocal", evolutionPoints);
+          localStorage.setItem("transcentionPointsLocal", transcentionPoints);
+          localStorage.setItem("prestigesLocal", prestiges);
+          localStorage.setItem("rebirthsLocal", rebirths);
+          localStorage.setItem("ascensionsLocal", ascensions);
+          localStorage.setItem("reincarnationsLocal", reincarnations);
+          localStorage.setItem("evolutionsLocal", evolutions);
+          localStorage.setItem("transcentionsLocal", transcentions);
+          localStorage.setItem("currencyKeyBoughtLocal", currencyKeyBought);
+          localStorage.setItem("petUnlockedLocal", currencyKeyBought);
+          localStorage.setItem("timesPettedLocal", timesPetted);
         }, tickRate);
       </script>
     </head>
   <body>
   </body>
 </html>
+
+          	childSizedCageAmount = Number(saveArray[5]);
+          	children = Number(saveArray[6]);
+          	prestigePoints = Number(saveArray[7]);
+          	rebirthPoints = Number(saveArray[8]);
+          	ascensionPoints = Number(saveArray[9]);
+          	reincarnationPoints = Number(saveArray[10]);
+          	evolutionPoints = Number(saveArray[11]);
+          	transcentionPoints = Number(saveArray[12]);
+          	prestiges = Number(saveArray[13]);
+          	rebirths = Number(saveArray[14]);
+          	ascensions = Number(saveArray[15]);
+          	reincarnations = Number(saveArray[16]);
+          	evolutions = Number(saveArray[17]);
+          	transcentions = Number(saveArray[18]);
+          	currencyKeyBought = saveArray[19];
+            petUnlocked = saveArray[20];
+            timesPetted = Number(saveArray[21]);
