@@ -82,6 +82,8 @@
       <br><br><br><br><br>
     
       <h2>Changelog:</h2>
+      <p>11/19/2026 - v1.2</p>
+      <p>  - Game now autosaves save-data to browser storage</p>
       <p>11/18/2026 - v1.1.2.0</p>
       <p>  - Added a single semi-colon (plus this changelog entry)</p>
       <p>11/18/2026 - v1.1.1.0</p>
@@ -137,7 +139,30 @@
         let timesPetted = 0;
         let nextPetColorUnlockAtDisplayVisible = false;
         let nextPetColorUnlockAt = 10;
-      
+
+        clicks = Number(localStorage.getItem("clicksLocal"));
+        multiplier = Number(localStorage.getItem("multiplierLocal"));
+        cPCBought = localStorage.getItem("cPCBoughtLocal");
+        bagelAmount = Number(localStorage.getItem("bagelAmountLocal"));
+        eBayBought = localStorage.getItem("eBayBoughtLocal");
+        childSizedCageAmount = Number(localStorage.getItem("childSizedCageAmountLocal"));
+        children = Number(localStorage.getItem("childrenLocal"));
+        prestigePoints = Number(localStorage.getItem("prestigesPointsLocal"));
+        rebirthPoints = Number(localStorage.getItem("rebirthPointsLocal"));
+        ascensionPoints = Number(localStorage.getItem("ascensionPointsLocal"));
+        reincarnationPoints = Number(localStorage.getItem("reincarnationPointsLocal"));
+        evolutionPoints = Number(localStorage.getItem("evolutionPointsLocal"));
+        transcentionPoints = Number(localStorage.getItem("transcentionPointsLocal"));
+        prestiges = Number(localStorage.getItem("prestigesLocal"));
+        rebirths = Number(localStorage.getItem("rebirthsLocal"));
+        ascensions = Number(localStorage.getItem("ascensionsLocal"));
+        reincarnations = Number(localStorage.getItem("reincarnationsLocal"));
+        evolutions = Number(localStorage.getItem("evolutionsLocal"));
+        transenctions = Number(localStorage.getItem("transcentionsLocal"));
+        currenceyKeyBought = localStorage.getItem("currencyKeyBoughtLocal");
+        petUnlocked = localStorage.getItem("petUnlockedLocal");
+        timesPetted = Number(localStorage.getItem("timesPettedLocal"));
+        
         function increaseClicks() {
           clicks += (1 * multiplier);
           document.getElementById("clickAmount").textContent = Math.floor(clicks);
@@ -621,9 +646,38 @@
           localStorage.setItem("reincarnationsLocal", reincarnations.toString());
           localStorage.setItem("evolutionsLocal", evolutions.toString());
           localStorage.setItem("transcentionsLocal", transcentions.toString());
-          localStorage.setItem("currencyKeyBoughtLocal", currencyKeyBought.toString());
-          localStorage.setItem("petUnlockedLocal", currencyKeyBought.toString());
+          localStorage.setItem("currencyKeyBoughtLocal", currencyKeyBought);
+          localStorage.setItem("petUnlockedLocal", petUnlocked);
           localStorage.setItem("timesPettedLocal", timesPetted.toString());
+          if (eBayBought === true) {
+            	document.getElementById("eBaySectionHeader").textContent = "ebay";
+            	document.getElementById("childSizedCage").removeAttribute("hidden");
+            	document.getElementById("childSizedCageAmount").removeAttribute("hidden");
+            	document.getElementById("childrenAmount").removeAttribute("hidden");
+            	document.getElementById("kidnap").removeAttribute("hidden");
+              document.getElementById("unlockEBay").hidden = true;
+          	}
+          if (cPCBought === true) {
+            document.getElementById("upgradeCPC").hidden = true;
+          }
+          if (prestiges >= 1) {
+            document.getElementById("prestigeDisplay").removeAttribute = ("hidden");
+            document.getElementById("prestigeDisplay").textContent = prestigePoints;
+          }
+          if (evolutions >= 1) {
+            document.getElementById("evolveDisplay").removeAttribute = ("hidden");
+            document.getElementById("evolveDisplay").removeAttribute = ("hidden");
+            document.getElementById("evolveDisplay").textContent = evolutionPoints;
+          }
+          if (currencyKeyBought === true) {
+            renderCurrencyKey();
+          }
+          document.getElementById("clickAmount").textContent = Math.floor(clicks);
+          document.getElementById("childSizedCageAmount").textContent = `Cages: ${childSizedCageAmount}`;
+     	  	document.getElementById("childrenAmount").textContent = `Children: ${children}`;
+          if (bagelAmount >= 1) {
+          	document.getElementById("bagelBar").textContent = bagelAmount;
+          };
         }, tickRate);
       </script>
     </head>
