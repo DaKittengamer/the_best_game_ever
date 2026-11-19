@@ -5,6 +5,9 @@ the changelog is broken so here:
 
 Changelog:
 
+11/19/2026 - v1.2
+  - Game now autosaves save-data to browser storage
+
 11/18/2026 - v1.1.2.0
   - Added single semi-colon (plus this changelog entry)
 
