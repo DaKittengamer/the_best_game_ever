@@ -46,6 +46,8 @@
       <p><span id="prestigeDisplay" hidden></span></p>
       <button id="currencyKeyButton" hidden onclick="currencyKeyUnlock()">Unlock currency symbol index - 2p</button>
       <button id="petUnlockButton" hidden onclick="petUnlock()">Unlock Pet - 3p</button>
+      <button id="findOutWhatDNWMeansBuyButton" hidden onclick="findOutWhatDNWMeansBuy()">Find out what DNW means - 3p</button>
+      <br>
       <p><span id="timesPettedDisplay" hidden></span></p>
       <br>
       <p><span id="petColorChangeIndicator" hidden>Pet Color</span></p>
@@ -65,7 +67,7 @@
       <button id="petColorTeal" hidden onclick="petColorSetTeal()">Teal</button>
       <button id="petColorNavy" hidden onclick="petColorSetNavy()">Navy</button>
       <br>
-      <canvas id="petCanvas" width="250" height="250" style="border:1px solid #FFFFFF;"></canvas>
+      <canvas id="petCanvas" hidden width="250" height="250" style="border:1px solid #FFFFFF;"></canvas>
       <br>
       <button id="rebirthButton" hidden onclick="rebirthButton()">Rebirth - 1000000p</button>
       <p><span id="rebirthDisplay" hidden></span></p>
@@ -82,6 +84,7 @@
       <br><br><br><br><br>
     
       <h2>Changelog:</h2>
+      <p><span id="whatDoesDNWMeanDisplay">Buy the "Find out what DNW means" prestige upgrade to find out what DNW means</span></p>
       <p>11/19/2026 - v1.2.0.1</p>
       <p>  - (Almost) the entire game was broken because I was missing a end quote</p>
       <p>  - (so i added it)</p>
@@ -93,7 +96,7 @@
       <p>  - Changed changelog formatting</p>
       <p>  - Added Navy as pet color</p>
       <p>11/17/2026 - v1.1.0.1</p>
-      <p>  - Fixed changelog not appearing</p>
+      <p>  - Fixed changelog not appearing (DNW)</p>
       <p>11/17/2026 - v1.1.0.0</p>
       <p>  - Finally uploaded pet update!</p>
       <p>  - Yay!</p>
@@ -142,6 +145,7 @@
         let timesPetted = 0;
         let nextPetColorUnlockAtDisplayVisible = false;
         let nextPetColorUnlockAt = 10;
+        let whatDoesDNWMeanKnown = false;
 
         clicks = Number(localStorage.getItem("clicksLocal"));
         multiplier = Number(localStorage.getItem("multiplierLocal"));
@@ -165,6 +169,7 @@
         currenceyKeyBought = localStorage.getItem("currencyKeyBoughtLocal");
         petUnlocked = localStorage.getItem("petUnlockedLocal");
         timesPetted = Number(localStorage.getItem("timesPettedLocal"));
+        whatDoesDNWMeanKnown = localStorage.getItem("petUnlockedLocal");
         
         function increaseClicks() {
           clicks += (1 * multiplier);
@@ -202,63 +207,35 @@
         }
       	function saveButtonClicked() {
           clicks = clicks.toPrecision(1);
-          let saveCode = (clicks.toString()).concat("|",multiplier.toString(),"|",cPCBought,"|",bagelAmount,"|",eBayBought,"|",childSizedCageAmount.toString(),"|",children.toString(),"|",prestigePoints.toString(),"|",rebirthPoints.toString(),"|",ascensionPoints.toString(),"|",reincarnationPoints.toString(),"|",evolutionPoints.toString(),"|",transcentionPoints.toString(),"|",prestiges.toString(),"|",rebirths.toString(),"|",ascensions.toString(),"|",reincarnations.toString(),"|",evolutions.toString(),"|",transcentions.toString(),"|",currencyKeyBought,"|",petUnlocked,"|",timesPetted.toString());
+          let saveCode = (clicks.toString()).concat("|",multiplier.toString(),"|",cPCBought,"|",bagelAmount,"|",eBayBought,"|",childSizedCageAmount.toString(),"|",children.toString(),"|",prestigePoints.toString(),"|",rebirthPoints.toString(),"|",ascensionPoints.toString(),"|",reincarnationPoints.toString(),"|",evolutionPoints.toString(),"|",transcentionPoints.toString(),"|",prestiges.toString(),"|",rebirths.toString(),"|",ascensions.toString(),"|",reincarnations.toString(),"|",evolutions.toString(),"|",transcentions.toString(),"|",currencyKeyBought,"|",petUnlocked,"|",timesPetted.toString(),"|",whatDoesDNWMeanKnown);
           document.getElementById("save").textContent = saveCode;
         }
       	function loadButtonClicked() {
         	let savecode = window.prompt("\Input save code here:");
-          	let saveArray = savecode.split("|");
-          	clicks = Number(saveArray[0]);
-          	multiplier = Number(saveArray[1]);
-          	cPCBought = saveArray[2];
-          	bagelAmount = Number(saveArray[3]);
-          	eBayBought = saveArray[4];
-          	childSizedCageAmount = Number(saveArray[5]);
-          	children = Number(saveArray[6]);
-          	prestigePoints = Number(saveArray[7]);
-          	rebirthPoints = Number(saveArray[8]);
-          	ascensionPoints = Number(saveArray[9]);
-          	reincarnationPoints = Number(saveArray[10]);
-          	evolutionPoints = Number(saveArray[11]);
-          	transcentionPoints = Number(saveArray[12]);
-          	prestiges = Number(saveArray[13]);
-          	rebirths = Number(saveArray[14]);
-          	ascensions = Number(saveArray[15]);
-          	reincarnations = Number(saveArray[16]);
-          	evolutions = Number(saveArray[17]);
-          	transcentions = Number(saveArray[18]);
-          	currencyKeyBought = saveArray[19];
-            petUnlocked = saveArray[20];
-            timesPetted = Number(saveArray[21]);
-          	if (eBayBought === true) {
-            	document.getElementById("eBaySectionHeader").textContent = "ebay";
-            	document.getElementById("childSizedCage").removeAttribute("hidden");
-            	document.getElementById("childSizedCageAmount").removeAttribute("hidden");
-            	document.getElementById("childrenAmount").removeAttribute("hidden");
-            	document.getElementById("kidnap").removeAttribute("hidden");
-              document.getElementById("unlockEBay").hidden = true;
-          	}
-          if (cPCBought === true) {
-            document.getElementById("upgradeCPC").hidden = true;
-          }
-          if (prestiges >= 1) {
-            document.getElementById("prestigeDisplay").removeAttribute = ("hidden");
-            document.getElementById("prestigeDisplay").textContent = prestigePoints;
-          }
-          if (evolutions >= 1) {
-            document.getElementById("evolveDisplay").removeAttribute = ("hidden");
-            document.getElementById("evolveDisplay").removeAttribute = ("hidden");
-            document.getElementById("evolveDisplay").textContent = evolutionPoints;
-          }
-          if (currencyKeyBought === true) {
-            renderCurrencyKey();
-          }
-          document.getElementById("clickAmount").textContent = Math.floor(clicks);
-          document.getElementById("childSizedCageAmount").textContent = `Cages: ${childSizedCageAmount}`;
-     	  	document.getElementById("childrenAmount").textContent = `Children: ${children}`;
-          if (bagelAmount >= 1) {
-          	document.getElementById("bagelBar").textContent = bagelAmount;
-          };
+          let saveArray = savecode.split("|");
+        	clicks = Number(saveArray[0]);
+        	multiplier = Number(saveArray[1]);
+        	cPCBought = saveArray[2];
+        	bagelAmount = Number(saveArray[3]);
+        	eBayBought = saveArray[4];
+        	childSizedCageAmount = Number(saveArray[5]);
+        	children = Number(saveArray[6]);
+        	prestigePoints = Number(saveArray[7]);
+          rebirthPoints = Number(saveArray[8]);
+        	ascensionPoints = Number(saveArray[9]);
+          reincarnationPoints = Number(saveArray[10]);
+          evolutionPoints = Number(saveArray[11]);
+        	transcentionPoints = Number(saveArray[12]);
+          prestiges = Number(saveArray[13]);
+        	rebirths = Number(saveArray[14]);
+        	ascensions = Number(saveArray[15]);
+          reincarnations = Number(saveArray[16]);
+        	evolutions = Number(saveArray[17]);
+        	transcentions = Number(saveArray[18]);
+        	currencyKeyBought = saveArray[19];
+          petUnlocked = saveArray[20];
+          timesPetted = Number(saveArray[21]);
+          whatDoesDNWMeanKnown = saveArray[22];
         }
       	function trapChild() {
       		if (bagelAmount >= 1) {
@@ -384,11 +361,6 @@
           if (prestigePoints >= 2 && petUnlocked === false) {
             prestigePoints -= 2;
             petUnlocked = true;
-            document.getElementById("petCanvas").removeAttribute = ("hidden");
-            document.getElementById("timesPettedDisplay").removeAttribute = ("hidden");
-            document.getElementById("nextPetColorUnlockAtDisplay").removeAttribute = ("hidden");
-            nextPetColorUnlockAtDisplayVisible = true;
-            petIconCreate();
           };
         };
         function petColorSetBlue() {
@@ -653,13 +625,13 @@
           localStorage.setItem("petUnlockedLocal", petUnlocked);
           localStorage.setItem("timesPettedLocal", timesPetted.toString());
           if (eBayBought === true) {
-            	document.getElementById("eBaySectionHeader").textContent = "ebay";
-            	document.getElementById("childSizedCage").removeAttribute("hidden");
-            	document.getElementById("childSizedCageAmount").removeAttribute("hidden");
-            	document.getElementById("childrenAmount").removeAttribute("hidden");
-            	document.getElementById("kidnap").removeAttribute("hidden");
-              document.getElementById("unlockEBay").hidden = true;
-          	}
+            document.getElementById("eBaySectionHeader").textContent = "ebay";
+          	document.getElementById("childSizedCage").removeAttribute("hidden");
+          	document.getElementById("childSizedCageAmount").removeAttribute("hidden");
+          	document.getElementById("childrenAmount").removeAttribute("hidden");
+          	document.getElementById("kidnap").removeAttribute("hidden");
+            document.getElementById("unlockEBay").hidden = true;
+          }
           if (cPCBought === true) {
             document.getElementById("upgradeCPC").hidden = true;
           }
@@ -680,6 +652,16 @@
      	  	document.getElementById("childrenAmount").textContent = `Children: ${children}`;
           if (bagelAmount >= 1) {
           	document.getElementById("bagelBar").textContent = bagelAmount;
+          };
+          if (whatDoesDNWMeanKnow === true) {
+            document.getElementById("whatDoesDNWMeanDisplay").textContent = "DNW stands for Did Not Work #InThisGame #CantVouchForMeaningBeingUniversal #TotallyWorthItUpgrades #Hashtags4ev";
+          };
+          if (petUnlocked === true) {
+            document.getElementById("petCanvas").removeAttribute = ("hidden");
+            document.getElementById("timesPettedDisplay").removeAttribute = ("hidden");
+            document.getElementById("nextPetColorUnlockAtDisplay").removeAttribute = ("hidden");
+            nextPetColorUnlockAtDisplayVisible = true;
+            petIconCreate();
           };
         }, tickRate);
       </script>
