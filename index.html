@@ -85,6 +85,9 @@
     
       <h2>Changelog:</h2>
       <p><span id="whatDoesDNWMeanDisplay">Buy the "Find out what DNW means" prestige upgrade to find out what DNW means</span></p>
+      <p>11/19/2026 - v1.2.1</p>
+      <p>  - Added prestige upgrade for finding out what DNW means</p>
+      <p>  - Fixed pet canvas not being hidden by default</p>
       <p>11/19/2026 - v1.2.0.1</p>
       <p>  - (Almost) the entire game was broken because I was missing a end quote</p>
       <p>  - (so i added it)</p>
@@ -270,6 +273,7 @@
             document.getElementById("prestigeDisplay").removeAttribute = ("hidden");
            	document.getElementById("currencyKeyButton").removeAttribute = ("hidden");
             document.getElementById("petUnlockButton").removeAttribute = ("hidden");
+            document.getElementById("findOutWhatDNWMeansBuyButton").removeAttribute = ("hidden");
           };
         };
       	function rebirthButton() {
@@ -515,6 +519,12 @@
                 };
               };
             };
+          };
+        };
+        function findOutWhatDNWMeansButton() {
+          if (whatDoesDNWMeanKnown === false && prestigePoints >= 3) {
+            whatDoesDNWMeanKnown = true;
+            prestigePoints -= 3;
           };
         };
         const timekeeper = setInterval(() => {
